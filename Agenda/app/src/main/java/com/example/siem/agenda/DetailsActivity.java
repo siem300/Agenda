@@ -29,6 +29,9 @@ public class DetailsActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.details_textview);
         textView.setText(assignment.getAssignment());
 
+        TextView textView1 = (TextView)findViewById(R.id.details_date);
+        textView1.setText(assignment.getDate());
+
         editText = (EditText) findViewById(R.id.details_updateText);
 
         Button updateButton = (Button) findViewById(R.id.details_updateButton);

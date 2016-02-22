@@ -6,6 +6,7 @@ package com.example.siem.agenda;
 public class Assignment {
     private long id;
     private String assignment;
+    private String date;
 
     public long getId() {
         return id;
@@ -24,7 +25,16 @@ public class Assignment {
         this.assignment = assignment;
     }
 
+    public String getDate(){
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date =  date;
+    }
+
     public String toString(){
         return assignment;
     }
+
 }

@@ -20,7 +20,7 @@ public class DataSource {
     private MySQLiteHelper dbHelper;
 
     private String[] assignmentAllColumns = {
-            MySQLiteHelper.COLUMN_ASSIGNMENT_ID, MySQLiteHelper.COLUMN_ASSIGNMENT
+            MySQLiteHelper.COLUMN_ASSIGNMENT_ID, MySQLiteHelper.COLUMN_ASSIGNMENT, MySQLiteHelper.COLUMN_DATE
     };
 
     public DataSource(Context context){
@@ -37,12 +37,13 @@ public class DataSource {
         dbHelper.close();
     }
 
-    public long createAssignment(String assignment){
+    public long createAssignment(String assignment, String date){
         if(!database.isOpen())
             open();
 
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_ASSIGNMENT, assignment);
+        values.put(MySQLiteHelper.COLUMN_DATE, date);
         long insertId = database.insert(MySQLiteHelper.TABLE_ASSIGNMENTS, null, values);
 
         if(database.isOpen())
@@ -70,6 +71,7 @@ public class DataSource {
 
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.COLUMN_ASSIGNMENT, assignment.getAssignment());
+        args.put(MySQLiteHelper.COLUMN_DATE, assignment.getDate());
         database.update(MySQLiteHelper.TABLE_ASSIGNMENTS, args, MySQLiteHelper.COLUMN_ASSIGNMENT_ID + " =?",
                 new String[]{Long.toString(assignment.getId())});
         if(database.isOpen())
@@ -106,6 +108,7 @@ public class DataSource {
             Assignment assignment = new Assignment();
             assignment.setId(cursor.getLong(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_ASSIGNMENT_ID)));
             assignment.setAssignment(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_ASSIGNMENT)));
+            assignment.setDate(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_DATE)));
                 return assignment;
         }catch(CursorIndexOutOfBoundsException exception){
             exception.printStackTrace();
@@ -118,7 +121,7 @@ public class DataSource {
         if (!database.isOpen())
             open();
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_ASSIGNMENTS, assignmentAllColumns, MySQLiteHelper.COLUMN_ASSIGNMENT_ID + "=?", new String[] { Long.toString(columnId)}, null, null, null);
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_ASSIGNMENTS, assignmentAllColumns, MySQLiteHelper.COLUMN_ASSIGNMENT_ID + "=?", new String[]{Long.toString(columnId)}, null, null, null);
 
         cursor.moveToFirst();
         Assignment assignment = cursorToAssignment(cursor);

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ public class AddAssignmentActivity extends AppCompatActivity {
     private DataSource datasource;
 
     EditText editText;
+    DatePicker datePicker;
+    String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,13 @@ public class AddAssignmentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         editText = (EditText)findViewById(R.id.editText);
+        datePicker = (DatePicker)findViewById(R.id.datePicker);
+
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth() + 1;
+        int year = datePicker.getYear();
+
+        date = day + "-" + month + "-" + year;
 
         datasource = new DataSource(this);
 
@@ -35,7 +45,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long assignmentId = datasource.createAssignment(editText.getText().toString());
+                long assignmentId = datasource.createAssignment(editText.getText().toString(), date);
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(MainActivity.EXTRA_ASSIGNMENT_ID, assignmentId);
                 setResult(Activity.RESULT_OK, resultIntent);

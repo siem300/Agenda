@@ -23,5 +23,8 @@
         android:layout_margin="16dp"
         android:text="@string/main_list_empty"
         android:gravity="center_horizontal"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:singleLine="true" />
+
+
 </RelativeLayout>
