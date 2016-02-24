@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_ASSIGNMENT = "extraAssignment";
+    //public static final String EXTRA_ASSIGNMENT = "extraAssignment";
 
     public static final String EXTRA_ASSIGNMENT_ID = "extraAssignmentId";
 
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 if(assignmentId != -1) {
                     Assignment assignment = datasource.getAssignment(assignmentId);
                     adapter.add(assignment);
+
                     updateAssignmentListView();
                 }
             }

@@ -20,7 +20,10 @@ public class DataSource {
     private MySQLiteHelper dbHelper;
 
     private String[] assignmentAllColumns = {
-            MySQLiteHelper.COLUMN_ASSIGNMENT_ID, MySQLiteHelper.COLUMN_ASSIGNMENT, MySQLiteHelper.COLUMN_DATE
+            MySQLiteHelper.COLUMN_ASSIGNMENT_ID,
+            MySQLiteHelper.COLUMN_TITLE,
+            MySQLiteHelper.COLUMN_DATE,
+            MySQLiteHelper.COLUMN_ASSIGNMENT
     };
 
     public DataSource(Context context){
@@ -37,13 +40,14 @@ public class DataSource {
         dbHelper.close();
     }
 
-    public long createAssignment(String assignment, String date){
+    public long createAssignment(String assignment, String date, String title){
         if(!database.isOpen())
             open();
 
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_ASSIGNMENT, assignment);
         values.put(MySQLiteHelper.COLUMN_DATE, date);
+        values.put(MySQLiteHelper.COLUMN_TITLE, title);
         long insertId = database.insert(MySQLiteHelper.TABLE_ASSIGNMENTS, null, values);
 
         if(database.isOpen())
@@ -72,6 +76,7 @@ public class DataSource {
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.COLUMN_ASSIGNMENT, assignment.getAssignment());
         args.put(MySQLiteHelper.COLUMN_DATE, assignment.getDate());
+        args.put(MySQLiteHelper.COLUMN_TITLE, assignment.getTitle());
         database.update(MySQLiteHelper.TABLE_ASSIGNMENTS, args, MySQLiteHelper.COLUMN_ASSIGNMENT_ID + " =?",
                 new String[]{Long.toString(assignment.getId())});
         if(database.isOpen())
@@ -107,8 +112,10 @@ public class DataSource {
         try{
             Assignment assignment = new Assignment();
             assignment.setId(cursor.getLong(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_ASSIGNMENT_ID)));
+            assignment.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_TITLE)));
             assignment.setAssignment(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_ASSIGNMENT)));
             assignment.setDate(cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.COLUMN_DATE)));
+
                 return assignment;
         }catch(CursorIndexOutOfBoundsException exception){
             exception.printStackTrace();

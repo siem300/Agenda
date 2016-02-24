@@ -5,8 +5,10 @@ package com.example.siem.agenda;
  */
 public class Assignment {
     private long id;
+    private String title;
     private String assignment;
     private String date;
+
 
     public long getId() {
         return id;
@@ -33,8 +35,15 @@ public class Assignment {
         this.date =  date;
     }
 
-    public String toString(){
-        return assignment;
+    public String getTitle(){
+        return title;
     }
 
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String toString(){
+        return title;
+    }
 }

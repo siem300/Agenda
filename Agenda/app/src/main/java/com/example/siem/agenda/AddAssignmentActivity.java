@@ -21,6 +21,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
     private DataSource datasource;
 
     EditText editText;
+    EditText titleText;
     DatePicker datePicker;
     String date;
     @Override
@@ -32,6 +33,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
 
         editText = (EditText)findViewById(R.id.editText);
         datePicker = (DatePicker)findViewById(R.id.datePicker);
+        titleText = (EditText)findViewById(R.id.titleText);
 
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth() + 1;
@@ -45,11 +47,17 @@ public class AddAssignmentActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                long assignmentId = datasource.createAssignment(editText.getText().toString(), date);
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(MainActivity.EXTRA_ASSIGNMENT_ID, assignmentId);
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
+                if (!TextUtils.isEmpty(editText.getText()) && !TextUtils.isEmpty(titleText.getText())) {
+                    long assignmentId = datasource.createAssignment(editText.getText().toString(), date, titleText.getText().toString());
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra(MainActivity.EXTRA_ASSIGNMENT_ID, assignmentId);
+                    setResult(Activity.RESULT_OK, resultIntent);
+                    finish();
+                } else {
+                    //Show a message to the user
+                    Toast.makeText(AddAssignmentActivity.this, "Please enter some text in the title and description fields", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
     }

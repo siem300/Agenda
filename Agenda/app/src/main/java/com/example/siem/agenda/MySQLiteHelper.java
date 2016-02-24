@@ -10,12 +10,13 @@ import android.util.Log;
  */
 public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "homeworkdatabase.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String TABLE_ASSIGNMENTS = "assignments";
     public static final String COLUMN_ASSIGNMENT_ID = "assignment_id";
     public static final String COLUMN_ASSIGNMENT = "assignment";
     public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_TITLE = "title";
 
     //create the database table
     private static final String DATABASE_CREATE_ASSIGNMENTS =
@@ -23,7 +24,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                     "(" +
                         COLUMN_ASSIGNMENT_ID + " integer primary key autoincrement, " +
                         COLUMN_ASSIGNMENT + " text not null, " +
-                        COLUMN_DATE + " text not null" +
+                        COLUMN_DATE + " text not null, " +
+                        COLUMN_TITLE + " text not null" +
                     ");";
 
     public MySQLiteHelper(Context context){

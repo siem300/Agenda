@@ -11,19 +11,27 @@
     tools:context=".DetailsActivity">
 
     <TextView
-        android:id="@+id/details_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.01"
-        android:textSize="30dp" />
+        android:id="@+id/details_title"
+        android:layout_weight="0.00"
+        android:maxLines="1"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/details_date"
-        android:layout_weight="0.06"
-        android:textSize="20dp"
+        android:layout_weight="0.00"
+        android:textSize="13dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/details_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.01" />
 
     <LinearLayout
         android:layout_width="match_parent"
