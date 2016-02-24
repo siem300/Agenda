@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -41,13 +44,18 @@ public class DetailsActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignment.setAssignment(editText.getText().toString());
-                datasource.updateAssignment(assignment);
-                Toast.makeText(DetailsActivity.this, "Assignment Updated", Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(editText.getText())) {
+                    assignment.setAssignment(editText.getText().toString());
+                    datasource.updateAssignment(assignment);
+                    Toast.makeText(DetailsActivity.this, "Assignment Updated", Toast.LENGTH_SHORT).show();
 
-                Intent resultIntent = new Intent();
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
+                    Intent resultIntent = new Intent();
+                    setResult(Activity.RESULT_OK, resultIntent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(DetailsActivity.this, "Please enter some text in the update field", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

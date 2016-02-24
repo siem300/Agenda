@@ -24,6 +24,11 @@ public class AddAssignmentActivity extends AppCompatActivity {
     EditText titleText;
     DatePicker datePicker;
     String date;
+
+    private int day;
+    private int month;
+    private int year;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +40,6 @@ public class AddAssignmentActivity extends AppCompatActivity {
         datePicker = (DatePicker)findViewById(R.id.datePicker);
         titleText = (EditText)findViewById(R.id.titleText);
 
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth() + 1;
-        int year = datePicker.getYear();
-
-        date = day + "-" + month + "-" + year;
-
         datasource = new DataSource(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,6 +47,12 @@ public class AddAssignmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(editText.getText()) && !TextUtils.isEmpty(titleText.getText())) {
+
+                    day = datePicker.getDayOfMonth();
+                    month = datePicker.getMonth() + 1;
+                    year = datePicker.getYear();
+
+                    date = day + "-" + month + "-" + year;
                     long assignmentId = datasource.createAssignment(editText.getText().toString(), date, titleText.getText().toString());
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra(MainActivity.EXTRA_ASSIGNMENT_ID, assignmentId);
