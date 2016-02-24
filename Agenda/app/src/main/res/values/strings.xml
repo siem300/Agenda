@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeWork</string>
+    <string name="app_name">Student Homework</string>
     <string name="main_list_empty">There are no assignments</string>
     <string name="main_menu_add">Add</string>
     <string name="title_activity_add_assignment">AddAssignmentActivity</string>

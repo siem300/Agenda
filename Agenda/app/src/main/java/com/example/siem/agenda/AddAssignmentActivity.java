@@ -34,6 +34,7 @@ public class AddAssignmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_assignment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Add Homework");
         setSupportActionBar(toolbar);
 
         editText = (EditText)findViewById(R.id.editText);
@@ -65,6 +66,8 @@ public class AddAssignmentActivity extends AppCompatActivity {
                 }
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
