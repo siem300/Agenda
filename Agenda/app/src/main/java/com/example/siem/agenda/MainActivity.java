@@ -1,8 +1,12 @@
 package com.example.siem.agenda;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Debug;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,6 +76,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        String date = prefs.getString("date", null);
+        //if(date != null)
+            Toast.makeText(this.getApplicationContext(), "last time opened " + date, Toast.LENGTH_LONG).show();
+
+        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        editor.putString("date", getCurrentDate());
+        editor.commit();
     }
 
     @Override
@@ -142,5 +159,14 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public String getCurrentDate(){
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DATE);
 
+        String date = day + "-" + month + "-" + year;
+
+        return date;
+    }
 }
