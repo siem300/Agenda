@@ -36,14 +36,23 @@
         android:layout_marginTop="43dp"
         android:inputType="textMultiLine" />
 
-    <DatePicker
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
+        android:text="Set date"
+        android:id="@+id/button"
+        android:onClick="showDatePickerDialog"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="182dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No date is set"
+        android:id="@+id/date"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:datePickerMode="spinner"
-        android:spinnersShown="true"
-        android:calendarViewShown="false" />
+        android:textSize="25dp" />
 
 </RelativeLayout>
